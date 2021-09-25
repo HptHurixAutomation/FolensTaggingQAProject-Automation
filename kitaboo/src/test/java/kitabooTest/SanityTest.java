@@ -187,30 +187,25 @@ public class SanityTest extends GenericMethod  {
 
 				reader.category_tab_navigation(8);
 				reader.open_book(8);
-				FixedLayout.validateThumbnail();
 			}
 
 			else if(colheader.contains("validateSingleDoubleview") && headerValue.contains("Y"))
 			{
 				reader.category_tab_navigation(8);
 				reader.open_book(8);
-				FixedLayout.validateSingleDoubleview();
 			}
 
 			else if(colheader.contains("validateFixedToHeightView") && headerValue.contains("Y"))
 			{
 				reader.category_tab_navigation(8);
 				reader.open_book(8);
-				FixedLayout.validateFixedToHeightView();
+
 			}
-
-
 			else if(colheader.contains("validateZoom") && headerValue.contains("Y"))
 			{
 
 				reader.category_tab_navigation(8);
 				reader.open_book(8);
-				FixedLayout.validateZoom();
 			}
 
 
@@ -219,14 +214,12 @@ public class SanityTest extends GenericMethod  {
 			{
 				reader.category_tab_navigation(8);
 				reader.open_book(8);
-				FixedLayout.validatePenTool();
 			}
 
 			else if(colheader.contains("validateStickyNotes") && headerValue.contains("Y"))
 			{
 				//reader.category_tab_navigation(8);
 				//reader.open_book(8);
-				FixedLayout.validateStickyNotes();
 			}
 
 		}
