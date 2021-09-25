@@ -65,21 +65,21 @@ public class SanityTest extends GenericMethod  {
 
 			if(colheader.contains("mark_favorite") &&  headerValue.contains("Y"))
 			{
-				bookShelf.mark_favorite();
+				//bookShelf.mark_favorite();
 			}
 			else if(colheader.contains("mark_unfavorite") && headerValue.contains("Y"))
 			{
-				bookShelf.mark_unfavorite();
+				//bookShelf.mark_unfavorite();
 			}
 
 			else if(colheader.equals("search") && headerValue.contains("Y"))
 			{
-				bookShelf.search();
+				//bookShelf.search();
 			}
 
 			else if(colheader.equals("search_cancelbtn") && headerValue.contains("Y"))
 			{
-				bookShelf.search_cancelbtn();
+				//bookShelf.search_cancelbtn();
 
 			}
 
@@ -88,7 +88,6 @@ public class SanityTest extends GenericMethod  {
 			{
 				reader.category_tab_navigation(7);
 				reader.open_book(9);
-				bookShelf.validateMoreInfo();
 			}
 
 
@@ -96,7 +95,6 @@ public class SanityTest extends GenericMethod  {
 			{
 				reader.category_tab_navigation(7);
 				reader.open_book(9);
-				bookShelf.validateAnalytics();
 			}
 
 			else if(colheader.contains("toc") && headerValue.contains("Y"))
