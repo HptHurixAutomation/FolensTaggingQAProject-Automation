@@ -50,13 +50,13 @@ public class ReaderNew extends GenericMethod{
 			List<WebElement> containers = ListgetWebElements("addQuestionsContainer");
 			String addquestContainer = "//div[@class='item-container']/div[2]/div/div[";
 
-			for(int i=1;i<=containers.size();i++)
+			for(int i=11;i<=containers.size();i++)
 			{
-				containers = ListgetWebElements("addQuestionsContainer");
+				
 				if(i>1)
 				{
 					Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\AutoITScrollUp.exe");
-					Thread.sleep(20000);
+					Thread.sleep(24000);
 					WebElement assenmentName = driver.findElement(By.xpath(addquestContainer+(i)+"]/div/div/div[1]/p"));
 					String asstName= assenmentName.getText();
 					System.out.println("Assessment name is: "+asstName);
@@ -84,8 +84,15 @@ public class ReaderNew extends GenericMethod{
 						qEdit.click();
 						Thread.sleep(3000);
 						//confirmationMessage();
-						waitForElementToBeClickable("confirmatEdit");
-						ClickElement("confirmatEdit");
+						try {
+							waitForElementToBeClickable("confirmatEdit");
+							ClickElement("confirmatEdit");
+						} catch (Exception e1) {
+							ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
+									" Test title: "+asstName,  "Error on confirmation yes: "+e1, "Fail", screeshot);
+							ReportGenerate.Fail("Verify tags on standard test - error on confirmation yes "+ e1, "Fail");
+
+						}
 						waitForElementToBeClickable("editQuestion");
 						ClickElement("editQuestion");
 						Thread.sleep(1000);
@@ -113,22 +120,16 @@ public class ReaderNew extends GenericMethod{
 
 									tagname3 = tag2.getText();
 									screeshot = screenshot("tagsValidation");
-									/*ReportGenerate.writeResult("geography", "Verifying standard test", "Test title: "+asstName, " ", ","+ tagname1 +" , "+tagname2 +" , "+ tagname3,
-											" Validate add bookmark functionality", "  ", "Pass", screeshot);*/
-									ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " Validate spanish language tooltip",
+									
+									ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
 											" Test title: "+asstName,  ","+ tagname1 +" , "+tagname2 +" , "+ tagname3 , "Pass", screeshot);
 									ReportGenerate.Pass("Validate standard test functionality - Test title: " +asstName+ " "+tagname1 +" and: "+tagname2 +" and: "+tagname3, "Pass");
 								} catch (Exception e) {
-
-									/*ReportGenerate.writeResult("Reader1.3 ", "Verifying standard test", "Validate standard", " Validate standard test functionality", " ",
-											" Validate add bookmark functionality", "error on getting tags"+e, "Fail", screeshot);*/
-									ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " Validate spanish language tooltip",
+									ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
 											" Test title: "+asstName,  "Error on getting tags: "+e, "Fail", screeshot);
 									ReportGenerate.Fail("Verify tags on standard test - error on getting tags "+ e, "Fail");
 
 								}
-
-
 
 							}
 							else
@@ -148,10 +149,8 @@ public class ReaderNew extends GenericMethod{
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			/*ReportGenerate.writeResult("Reader1.3 ", "Verifying standard test", "Validate standard", " Validate standard test functionality", " ",
-					" Validate add bookmark functionality", "error on standard test"+e, "Fail", screeshot);*/
-			ReportGenerate.writeResult("KitabooReader0.5 ", "Validate spanish language", "Validate spanish language tooltip", " Validate spanish language tooltip",
-					" Validate spanish language tooltip", "Able to view spanish language tooltip" , "Pass", screeshot);
+			ReportGenerate.writeResult("Folens hive tags ", " ", " ", " ",
+					" Validate standard test subjects", "Unable to get the tags: "+e , "Fail", screeshot);
 			ReportGenerate.Fail("Verify standard test functionality - error "+ e, "Fail");
 		}
 
@@ -162,10 +161,20 @@ public class ReaderNew extends GenericMethod{
 
 	}
 
-	public static void confirmationMessage() throws InterruptedException
+	public static void confirmationMessage() throws InterruptedException, IOException
 	{
-		waitForElementToBeClickable("confirmationYes");
-		ClickElement("confirmationYes");
+		try {
+			waitForElementToBeClickable("confirmationYes");
+			ClickElement("confirmationYes");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			waitForElementToBeClickable("anotherConfirYes");
+			ClickElement("anotherConfirYes");
+			ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
+					"common question confirmation yes",  "Error on confirmation yes: "+e, "Fail", screeshot);
+			ReportGenerate.Fail("Verify tags on standard test - error on confirmation yes "+ e, "Fail");
+		}
 		Thread.sleep(5000);
 	}
 
