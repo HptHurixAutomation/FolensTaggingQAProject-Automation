@@ -48,15 +48,18 @@ public class ReaderNew extends GenericMethod{
 			waitForElementToBeClickable("addQuestionsContainer");
 
 			List<WebElement> containers = ListgetWebElements("addQuestionsContainer");
+			Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\AutoITScrollUp.exe");
+			Thread.sleep(35000);
+			containers = ListgetWebElements("addQuestionsContainer");
 			String addquestContainer = "//div[@class='item-container']/div[2]/div/div[";
 
-			for(int i=11;i<=containers.size();i++)
+			for(int i=17;i<=containers.size();i++)
 			{
 				
 				if(i>1)
 				{
 					Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\AutoITScrollUp.exe");
-					Thread.sleep(24000);
+					Thread.sleep(35000);
 					WebElement assenmentName = driver.findElement(By.xpath(addquestContainer+(i)+"]/div/div/div[1]/p"));
 					String asstName= assenmentName.getText();
 					System.out.println("Assessment name is: "+asstName);
