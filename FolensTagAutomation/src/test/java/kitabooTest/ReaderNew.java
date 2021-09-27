@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
+import org.apache.http.util.ExceptionUtils;
 import org.apache.poi.util.SystemOutLogger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -53,9 +55,9 @@ public class ReaderNew extends GenericMethod{
 			containers = ListgetWebElements("addQuestionsContainer");
 			String addquestContainer = "//div[@class='item-container']/div[2]/div/div[";
 
-			for(int i=17;i<=containers.size();i++)
+			for(int i=32;i<=containers.size();i++)
 			{
-				
+
 				if(i>1)
 				{
 					Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\AutoITScrollUp.exe");
@@ -69,7 +71,16 @@ public class ReaderNew extends GenericMethod{
 
 					driver.findElement(By.xpath(addquestContainer+(i)+"]/div/div/div[2]/div[3]/div/div[5]")).click();
 
-					confirmationMessage();
+					try {
+						confirmationMessage();
+					} catch (Exception e2) {
+						// TODO Auto-generated catch block
+
+						System.out.println("Alert is not present");
+						ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
+								"common question confirmation yes",  "Error on confirmation yes: "+e2, "Fail", screeshot);
+						ReportGenerate.Fail("Verify tags on standard test - error on confirmation yes "+e2, "Fail");
+					}
 					Thread.sleep(1000);
 					waitForElementToBeClickable("cancelQuestion");
 
@@ -123,7 +134,7 @@ public class ReaderNew extends GenericMethod{
 
 									tagname3 = tag2.getText();
 									screeshot = screenshot("tagsValidation");
-									
+
 									ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
 											" Test title: "+asstName,  ","+ tagname1 +" , "+tagname2 +" , "+ tagname3 , "Pass", screeshot);
 									ReportGenerate.Pass("Validate standard test functionality - Test title: " +asstName+ " "+tagname1 +" and: "+tagname2 +" and: "+tagname3, "Pass");
@@ -166,19 +177,24 @@ public class ReaderNew extends GenericMethod{
 
 	public static void confirmationMessage() throws InterruptedException, IOException
 	{
+
+		Thread.sleep(5000);
+
+
 		try {
 			waitForElementToBeClickable("confirmationYes");
 			ClickElement("confirmationYes");
-			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+
 			waitForElementToBeClickable("anotherConfirYes");
 			ClickElement("anotherConfirYes");
-			ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
-					"common question confirmation yes",  "Error on confirmation yes: "+e, "Fail", screeshot);
-			ReportGenerate.Fail("Verify tags on standard test - error on confirmation yes "+ e, "Fail");
 		}
-		Thread.sleep(5000);
+
+
+
+
+
+
 	}
 
 	public static void validatePageMode() throws InterruptedException, IOException {
