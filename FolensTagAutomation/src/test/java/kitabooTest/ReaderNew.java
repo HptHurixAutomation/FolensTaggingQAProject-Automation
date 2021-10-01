@@ -51,17 +51,21 @@ public class ReaderNew extends GenericMethod{
 
 			List<WebElement> containers = ListgetWebElements("addQuestionsContainer");
 			Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\testAuto2.exe");
-			Thread.sleep(28000);
+			Thread.sleep(40000);
+			Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\testAuto2.exe");
+			Thread.sleep(40000);
 			containers = ListgetWebElements("addQuestionsContainer");
 			String addquestContainer = "//div[@class='item-container']/div[2]/div/div[";
 
-			for(int i=184;i<=containers.size();i++)
+			for(int i=5;i<=containers.size();i++)
 			{
 
 				if(i>1)
 				{
 					Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\testAuto2.exe");
-					Thread.sleep(28000);
+					Thread.sleep(35000);
+					Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\testAuto2.exe");
+					Thread.sleep(33000);
 					WebElement assenmentName = driver.findElement(By.xpath(addquestContainer+(i)+"]/div/div/div[1]/p"));
 					String asstName= assenmentName.getText();
 					System.out.println("Assessment name is: "+asstName);
@@ -126,56 +130,47 @@ public class ReaderNew extends GenericMethod{
 										tagname1 = tags.getText();
 										System.out.println("Title name: "+asstName+" tagname: "+tagname1);
 										
-										ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
-												" Test title: "+asstName, " , "+ tagname1 , "Pass", screeshot);
-										ReportGenerate.Pass("Validate standard test functionality - Test title: "+asstName+" , "+ tagname1, "Pass");
+										/*
+										 * ReportGenerate.writeResult("Tag Validations", "Folens hive",
+										 * "Verify tags in standard test", " ", " Test title: "+asstName, " , "+
+										 * tagname1 , "Pass", screeshot);
+										 * ReportGenerate.Pass("Validate standard test functionality - Test title: "
+										 * +asstName+" , "+ tagname1, "Pass");
+										 */
 
 									}
-									else 
-									{
-										System.out.println("Tag1 is not displaying");
-									}
-								}catch (Exception e) {
-									ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
-											" Test title: "+asstName, " ,No tags found", "Fail", screeshot);
-									ReportGenerate.Pass("Validate standard test functionality - Test title: "+asstName+",No tags found", "Fail");
-								}
-								try {
+									
+								
 									WebElement tags1 = GenericMethod.driver.findElement(By.xpath(basicXpath+(x)+"]/div[2]/span[2]"));
 									if(tags1.isDisplayed())
 									{
 										tagname2 = tags1.getText();
 										System.out.println("Title name: "+asstName+" tagname2: "+tagname2);
-										ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
-												" Test title: "+asstName, " , "+ tagname2  , "Pass", screeshot);
-										ReportGenerate.Pass("Validate standard test functionality - Test title: "+asstName+" , "+ tagname2, "Pass");
+										/*
+										 * ReportGenerate.writeResult("Tag Validations", "Folens hive",
+										 * "Verify tags in standard test", " ", " Test title: "+asstName, " , "+
+										 * tagname2 , "Pass", screeshot);
+										 * ReportGenerate.Pass("Validate standard test functionality - Test title: "
+										 * +asstName+" , "+ tagname2, "Pass");
+										 */
 									}
-									else 
-									{
-										System.out.println("Tag2 is not displaying");
-									}
-								} catch (Exception e) {
-									ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
-											" Test title: "+asstName, " ,No tags found" , "Fail", screeshot);
-									ReportGenerate.Pass("Validate standard test functionality - Test title: "+asstName+",No tags found", "Fail");
-								}
-								try {
+									
+								
 									WebElement tag2 = GenericMethod.driver.findElement(By.xpath(basicXpath+(x)+"]/div[3]/span[2]"));
+									
 									if(tag2.isDisplayed())
 									{
 										tagname3 = tag2.getText();
 										System.out.println("Title name: "+asstName+" tagname3: "+tagname3);
-										ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
-												" Test title: "+asstName, " ,"+ tagname3 , "Pass", screeshot);
-										ReportGenerate.Pass("Validate standard test functionality - Test title: "+asstName+" ,"+ tagname3, "Pass");
+										
 									}
-									else 
-									{
-										System.out.println("Tag3 is not displaying");
-									}
+									ReportGenerate.writeResult("Tag Validations", "Test title: "+asstName," ", " "+ tagname1, " "+ tagname2,
+											"" + tagname3, "Pass", screeshot);
+									ReportGenerate.Pass("Validate standard test functionality - Test title: "+asstName+" ,"+ tagname1+ ", "+tagname2+", "+tagname3, "Pass");
+									
 								} catch (Exception e) {
-									ReportGenerate.writeResult("Tag Validations", "Folens hive", "Verify tags in standard test", " ",
-											" Test title: "+asstName, " ,No tags found" , "Fail", screeshot);
+									ReportGenerate.writeResult("Tag Validations", "Test title: "+asstName," ", " "+ tagname1, " "+ tagname2,
+											"" + tagname3, "Fails", screeshot);
 									ReportGenerate.Pass("Validate standard test functionality - Test title: "+asstName+",,No tags found", "Fail");
 								}
 
