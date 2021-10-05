@@ -1,25 +1,11 @@
 package kitabooTest;
 
-import static org.testng.Assert.assertEquals;
-
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
-import org.apache.http.util.ExceptionUtils;
-import org.apache.poi.util.SystemOutLogger;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 public class ReaderNew extends GenericMethod{
@@ -30,9 +16,6 @@ public class ReaderNew extends GenericMethod{
 	public static GenericMethod generic = new GenericMethod();
 	public static WebElement element;
 	static boolean flagT = true;
-
-
-
 
 	public static void tagsValidation() throws InterruptedException, IOException {
 
@@ -336,204 +319,7 @@ public class ReaderNew extends GenericMethod{
 		}
 
 
-
-
-
-
 	}
 
-	public static void validatePageMode() throws InterruptedException, IOException {
-
-		GenericMethod.ClickElement("page_mode");
-
-		GenericMethod.waitVisibleWebElement("page_mode");
-
-		try {
-			//get page mode list
-			List<WebElement> modeList = GenericMethod.driver.findElements(By.xpath("//*[@id='switchdataText']/button"));
-
-			for(WebElement ele : modeList)
-			{
-				Thread.sleep(2000);
-				String  pagemo = ele.getAttribute("aria-label");
-				ele.click();
-				Thread.sleep(2000);
-				screeshot=screenshot(pagemo);
-				ReportGenerate.writeResult("Reader1.11 ", "PageMode", "Validate  PageMode ", " Validate Page Mode functionality",
-						" Validate Page Mode functionality", "Able to click "+pagemo , "Pass", screeshot);
-				ReportGenerate.Pass("Validate Page Mode functionality - Able to click "+ pagemo, "Pass");
-
-			}
-
-			/*ClickElement("backtoBookShelf");
-			verifyElementIsDisplay("catogery_list");
-			Thread.sleep(2000);*/
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			ReportGenerate.writeResult("Reader1.11 ", "Page Mode", "Validate Page Mode ", " Validate Page Mode functionality",
-					" Validate Page Mode functionality", "Unable to click page mode "+ e, "Fail", screeshot);
-			ReportGenerate.Fail("Validate Page Mode functionality - error: " +e, "Fail");
-		}
-		finally
-		{
-			ReportGenerate.after();
-		}
-
-	}
-
-	public static void validatePageMargins() throws InterruptedException, IOException {
-
-		GenericMethod.ClickElement("page_margins");
-		Thread.sleep(1000);
-
-		GenericMethod.ClickElement("text_Settings");
-
-		GenericMethod.waitVisibleWebElement("page_margins");
-
-
-		try {
-			//get page margin list
-			List<WebElement> marginList = GenericMethod.driver.findElements(By.xpath("//*[@id='applyMargintext']/button"));
-
-			for(WebElement ele : marginList)
-			{
-				Thread.sleep(2000);
-				String  pagema = ele.getAttribute("aria-label");
-				ele.click();
-				Thread.sleep(2000);
-
-				screeshot = screenshot(pagema);
-				ReportGenerate.writeResult("Reader1.12 ", "validatePageMargins", "Page Margins section ", " Validate Page Margins functionality",
-						" Validate Page Margins functionality", "Able to click " +pagema, " Pass", screeshot);
-				ReportGenerate.Pass("Validate Page Margins functionality - Able to click " +pagema, "Pass");
-
-				ClickElement("text_Settings");
-
-			}
-
-			/*ClickElement("backtoBookShelf");
-			verifyElementIsDisplay("catogery_list");
-			Thread.sleep(2000);*/
-
-		} catch (Exception e) {
-			ReportGenerate.writeResult("Reader1.12 ", "validatePageMargins", "validatePageMargins ", " Validate Page Margins functionality",
-					" Validate Page Margins functionality", "Not clicked page margin" , "Fail", screeshot);
-			ReportGenerate.Fail("Validate Page Margins functionality error: " + e, "Fail");
-		}
-		finally
-		{
-			ReportGenerate.after();
-		}
-
-	}
-
-
-	public static void validateFilterHighlight() throws IOException, InterruptedException
-	{
-
-		try {
-			waitUntilPageLoad();
-			Thread.sleep(12000);
-			waitForElementToBeClickable("MyData");
-			ClickElement("MyData");
-
-			Thread.sleep(1000);
-
-			waitForElementToBeClickable("myDataFilter");
-			ClickElement("myDataFilter");
-
-			waitForElementToBeClickable("Highlight");
-			ClickElement("Highlight");
-
-			Thread.sleep(1000);
-			screeshot = screenshot("myDataFilter");
-			ReportGenerate.writeResult("My data Filter ", "Validate my data filter for highlight", "Validate my data filter for highlight", "My data filter for highlight",		
-					" Validate Page Margins functionality", "Able to view the highlight list on filter", " Pass", screeshot);
-			ReportGenerate.Pass("Validate Page Margins functionality - Able to view the highlight list on filter", "Pass");
-
-		} catch (Exception e) {
-			ReportGenerate.writeResult("My data Filter ", "Validate my data filter for highlight", "Validate my data filter for highlight", "My data filter for highlight",		
-					" Validate Page Margins functionality", "Unable to view the highlight list on filter", "Fail", screeshot);
-			ReportGenerate.Fail("Unable to view the highlight list in filter: " + e, "Fail");
-		}
-
-		try {
-			waitForElementToBeClickable("highlightFilterAll");
-			ClickElement("highlightFilterAll");
-			Thread.sleep(1000);
-			screeshot = screenshot("highlightFilterAll");
-			ReportGenerate.writeResult("My data Filter ", "Validate All filter for highlight", "Validate All filter for highlight", "Validate All filter for highlight",		
-					" Validate All filter for highlight", "Able to unfilter the highlight", " Pass", screeshot);
-			ReportGenerate.Pass("Validate Page Margins functionality - Able to unfilter the highlight", "Pass");
-
-			ClickElement("backtoBookShelf");
-			verifyElementIsDisplay("catogery_list");
-			Thread.sleep(2000);
-
-		} catch (Exception e) {
-			ReportGenerate.writeResult("My data Filter ", "Validate All filter for highlight", "Validate All filter for highlight", "Validate All filter for highlight",		
-					" Validate All filter for highlight", "Unable to unfilter the highlight "+ e , "Fail", screeshot);
-			ReportGenerate.Fail("Unable to unfilter all the highlight: " + e, "Fail");
-		}
-
-
-		finally
-		{
-			ReportGenerate.after();
-		}
-
-	}
-
-	public static void validateScrollView() throws InterruptedException, IOException {
-
-		GenericMethod.waitVisibleWebElement("scroll_view");
-
-		String buttonstatus = GetAttributeValue("scroll_view", "aria-checked");
-		if(buttonstatus.equals("true"))
-		{
-			//System.out.println("Scroll view is in on mode");
-			Thread.sleep(2000);
-			GenericMethod.ClickElement("scroll_view");
-
-			Thread.sleep(2000);
-
-			GenericMethod.verifyElementIsDisplay("singpage_view");
-
-			String pageview = GetAttributeValue("singpage_view", "aria-label");
-
-			if(pageview.equals("Single Page View (Ctrl+Shift+V)"))
-			{
-				screeshot=screenshot(pageview);
-				ReportGenerate.writeResult("Reader1.13 ", "validateScrollView", "validateScrollView ", " validateScrollView functionality",
-						" validateScrollView functionality", "Single page functionality is appeared on scroll mode in off mode", "Pass", screeshot);
-				ReportGenerate.Pass("Validate Scroll view functionality", "Pass");
-			}
-
-			else
-			{
-				ReportGenerate.writeResult("Reader1.13 ", "validateScrollView", "Validate scrollView functionality ", " Validate scrollView functionality",
-						" Validate scrollView functionality", "Single page functionality is not appeared", "Fail", screeshot);
-				ReportGenerate.Fail("Validate Scroll view functionality", "Fail");
-
-			}
-
-		}
-
-		else
-		{
-			ReportGenerate.writeResult("Reader1.13 ", "Scroll view", "Validate  scroll view ", " Validate scrollView functionality",
-					" Validate scrollView functionality", "Scroll view is in off mode", "Fail", screeshot);
-			ReportGenerate.Fail("Validate Scroll view functionality", "Fail");
-
-			ReportGenerate.after();
-
-		}
-
-		ClickElement("backtoBookShelf");
-		verifyElementIsDisplay("catogery_list");
-		Thread.sleep(2000);
-
-	}
 
 }
