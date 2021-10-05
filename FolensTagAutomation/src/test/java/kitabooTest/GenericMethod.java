@@ -588,7 +588,7 @@ public class GenericMethod  {
 	public static void waitForElementToBeClickable(String locatorkey) {
 		String locatorMethod = null;
 		String locatorValue = null;
-		wait30 =  new WebDriverWait(driver, 30);
+		wait30 =  new WebDriverWait(driver, 20);
 		try {
 			String[] locatorMethodName = readlocators(locatorkey);
 			locatorMethod = locatorMethodName[0];

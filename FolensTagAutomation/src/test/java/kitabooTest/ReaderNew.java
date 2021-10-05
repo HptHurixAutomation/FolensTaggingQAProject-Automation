@@ -51,30 +51,30 @@ public class ReaderNew extends GenericMethod{
 
 			List<WebElement> containers = ListgetWebElements("addQuestionsContainer");
 			Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\testAuto2.exe");
-			Thread.sleep(40000);
+			Thread.sleep(35000);
 			Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\testAuto2.exe");
-			Thread.sleep(40000);
+			Thread.sleep(35000);
 			containers = ListgetWebElements("addQuestionsContainer");
 			String addquestContainer = "//div[@class='item-container']/div[2]/div/div[";
 
-			for(int i=1;i<=containers.size();i++)
+			for(int i=43;i<=300;i++)
 			{
 
 				if(i>1)
 				{
 					Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\testAuto2.exe");
-					Thread.sleep(35000);
-					Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\testAuto2.exe");
-					Thread.sleep(33000);
+					Thread.sleep(30000);
+					/*Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\testAuto2.exe");
+					Thread.sleep(33000);*/
 					WebElement assenmentName = driver.findElement(By.xpath(addquestContainer+(i)+"]/div/div/div[1]/p"));
 					String asstName= assenmentName.getText();
 					System.out.println("Assessment name is: "+asstName);
 
 					driver.findElement(By.xpath(addquestContainer+(i)+"]/div/div/div[2]/div[2]")).click();
-					Thread.sleep(3000);
+					Thread.sleep(2000);
 
 					driver.findElement(By.xpath(addquestContainer+(i)+"]/div/div/div[2]/div[3]/div/div[5]")).click();
-					Thread.sleep(3000);
+					Thread.sleep(2000);
 					try {
 						confirmationMessage();
 					} catch (Exception e2) {
@@ -84,7 +84,7 @@ public class ReaderNew extends GenericMethod{
 								"common question confirmation yes",  "Error on confirmation yes: "+e2, "Fail", screeshot);
 						ReportGenerate.Fail("Verify tags on standard test - error on confirmation yes "+e2, "Fail");*/
 					}
-					Thread.sleep(5000);
+					Thread.sleep(2000);
 					waitForElementToBeClickable("cancelQuestion");
 
 					List<WebElement> questlist = ListgetWebElements("questionsList");
@@ -92,15 +92,15 @@ public class ReaderNew extends GenericMethod{
 
 					for(int j=1;j<=questlist.size();j++)
 					{
-						Thread.sleep(10000);
+						Thread.sleep(7000);
 						JavascriptExecutor js = (JavascriptExecutor) GenericMethod.driver;
 						WebElement questEditSymb = GenericMethod.driver.findElement(By.xpath(edittests+(j)+"]/div[2]/div/div[3]/div/div/div/div/img"));
 						js.executeScript("window.scrollBy(0,550)");
 						questEditSymb.click();
-						Thread.sleep(8000);
+						Thread.sleep(6000);
 						WebElement qEdit = GenericMethod.driver.findElement(By.xpath(edittests+(j)+"]/div[2]/div/div[3]//div[text()='Edit']"));
 						qEdit.click();
-						Thread.sleep(8000);
+						Thread.sleep(4000);
 						//confirmationMessage();
 						try {
 							waitForElementToBeClickable("confirmatEdit");
@@ -113,7 +113,7 @@ public class ReaderNew extends GenericMethod{
 						}
 						waitForElementToBeClickable("editQuestion");
 						ClickElement("editQuestion");
-						Thread.sleep(5000);
+						Thread.sleep(3000);
 						waitForElementToBeClickable("questionTags");
 						List<WebElement> taglist = driver.findElements(By.xpath("//div[contains(@class,'assmntSetMain')]/div"));
 						String basicXpath = "//div[contains(@class,'assmntSetMain')]/div[";
@@ -122,7 +122,7 @@ public class ReaderNew extends GenericMethod{
 						{
 							if(x>4)
 							{
-								Thread.sleep(6000);
+								Thread.sleep(5000);
 
 								try {
 									WebElement tags = GenericMethod.driver.findElement(By.xpath(basicXpath+(x)+"]/div[1]/span[2]"));
@@ -200,7 +200,7 @@ public class ReaderNew extends GenericMethod{
 									JavascriptExecutor js1 = (JavascriptExecutor) GenericMethod.driver;
 									js1.executeScript("arguments[0].click();", childEditSymb);
 									confirmationMessage();
-									Thread.sleep(5000);
+									Thread.sleep(3000);
 
 									waitForElementToBeClickable("editQuestion");
 									ClickElement("editQuestion");
@@ -272,6 +272,7 @@ public class ReaderNew extends GenericMethod{
 									}
 
 									screeshot = screenshot("tagsValidation");
+									Thread.sleep(4000);
 									ClickElement("questionsBack");
 									Thread.sleep(15000);
 
@@ -279,6 +280,7 @@ public class ReaderNew extends GenericMethod{
 							}
 							else
 							{
+								Thread.sleep(2000);
 								ClickElement("questionsBack");
 								Thread.sleep(15000);
 							}
@@ -286,16 +288,20 @@ public class ReaderNew extends GenericMethod{
 							System.out.println("there is no child questions and tags");
 						}
 						try {
+							Thread.sleep(2000);
+							waitForElementToBeClickable("questionsBack");
 							ClickElement("questionsBack");
-							Thread.sleep(15000);
+							Thread.sleep(8000);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 
 					}
+					Thread.sleep(2000);
+					waitForElementToBeClickable("mainQuestionBack");
 					ClickElement("mainQuestionBack");
-					Thread.sleep(15000);
+					Thread.sleep(8000);
 				}
 
 			}
